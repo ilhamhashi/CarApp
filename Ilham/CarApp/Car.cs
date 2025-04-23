@@ -1,6 +1,5 @@
 ﻿using System;
-
-internal class Car
+abstract public class Car
 {
 	public string Brand { get; set; }
 	public string Model { get; set; }
@@ -8,13 +7,13 @@ internal class Car
 	public int Odometer;
 	public bool isEngineOn;
 
-	public Car(string brand, string model, string licensePlate)
+    public Car(string brand, string model, string licensePlate)
 	{
 		Brand = brand;
 		Model = model;
 		LicensePlate = licensePlate;
 		Odometer = 0;
-		isEngineOn = false;
+		isEngineOn = true;
 	}
 
 	public void StartEngine()
@@ -28,10 +27,20 @@ internal class Car
         isEngineOn = false;
         Console.WriteLine("Motoren er slukket.");
     }
-
 	public virtual void Drive(double distance)
 	{
-		int odometer = Odometer += Convert.ToInt32(distance);
-		Console.WriteLine($"Bilen kører en tur på {distance} km.");
-	}
+        Odometer += Convert.ToInt32(distance);
+        UpdateEnergyLevel(distance);
+        Console.WriteLine($"Bilen kører en tur på {distance} km.");
+    }
+
+    public virtual string GetCarDetails()
+    {
+        return $"Brand: {Brand}\nModel: {Model}\nNummerplade: {LicensePlate}\nOdometer: {Odometer} km";
+    }
+
+    public abstract bool CanDrive();
+	public abstract void UpdateEnergyLevel(double distance);
+	public abstract double CalculateConsumption(double distance);
+	public abstract void RefuelOrCharge(double amount);
 }
