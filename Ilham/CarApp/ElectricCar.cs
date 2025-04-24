@@ -1,11 +1,13 @@
 ﻿using System;
 
-public class ElectricCar : Car
+public class ElectricCar : Car, IEnergy
 {
 
     public double BatteryLevel { get; set; }
 	public double BatteryCapacity { get; set; }
 	public double KmPerKWh {  get; set; }
+    public double EnergyLevel { get; }
+    public double MaxEnergy { get; }
 
     public ElectricCar(string brand, string model, string licensePlate, double batteryCapacity, double kmPerKWh) : base(brand, model, licensePlate)
     {
@@ -13,13 +15,17 @@ public class ElectricCar : Car
 		KmPerKWh = kmPerKWh;
     }
 
-    public override void RefuelOrCharge(double amount)
+    public void Refill(double amount)
 	{
         BatteryLevel += amount;
         Console.WriteLine($"Nyt batteriniveau: {BatteryLevel} KWh.");
     }
+    public void UseEnergy(double distance)
+    {
+        BatteryLevel -= distance / KmPerKWh;
+    }
 
-    public override bool CanDrive()
+    /* public override bool CanDrive()
     {
         if (BatteryLevel > 0 && isEngineOn)
             return true;
@@ -27,22 +33,11 @@ public class ElectricCar : Car
             return false;
     }
 
-    public override void UpdateEnergyLevel(double distance)
-    {
-        BatteryLevel -= CalculateConsumption(distance);
-    }
-
-    public override double CalculateConsumption(double distance)
-    {
-
-        return distance / KmPerKWh;
-    }
-
     public override void Drive(double distance)
     {
         base.Drive(distance);
         Console.WriteLine("Dette er en elbil!");
-    }
+    } */
 
     static public ElectricCar AddACar()
     {

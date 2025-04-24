@@ -1,14 +1,19 @@
 ﻿using System;
+using System.Runtime.ConstrainedExecution;
 
-public class Taxi : FuelCar
+public class Taxi : Car, IEnergy
 {
     public double StartPrice { get; set; }
     public double PricePerKm { get; set; }
     public double PricePerMinute { get; set; }
-    public bool MeterStarted { get; set; }
+    private bool MeterStarted { get; set; }
+    private Car Car { get; set; }
+    public double EnergyLevel { get; }
+    public double MaxEnergy { get; }
 
-    public Taxi(string brand, string model, string licensePlate, double tankCapacity, double kmPerLiter, double startPrice, double pricePerKm, double pricePerMinute) : base(brand, model, licensePlate, tankCapacity, kmPerLiter)
+    public Taxi(string brand, string model, string licensePlate, Car car, double startPrice, double pricePerKm, double pricePerMinute) : base(brand, model, licensePlate)
     {
+        Car = car;
         StartPrice = startPrice;
         PricePerKm = pricePerKm;
         PricePerMinute = pricePerMinute;
@@ -32,25 +37,32 @@ public class Taxi : FuelCar
         return StartPrice + PricePerKm * distance + PricePerMinute * minutes;
     }
 
-    public override bool CanDrive()
+    public void Refill(double amount)
     {
-        return base.CanDrive();
+
     }
 
-    public override void UpdateEnergyLevel(double distance)
+    public void UseEnergy(double distance)
     {
-        base.UpdateEnergyLevel(distance);
-    }
 
-    public override double CalculateConsumption(double distance)
-    {
-        return base.CalculateConsumption(distance);
     }
 
     public override void Drive(double distance)
     {
         base.Drive(distance);
     }
+
+    public override bool CanDrive(double distance)
+    {
+        return base.CanDrive(distance);
+    }
+
+    public override string GetCarDetails()
+    {
+        return base.GetCarDetails();
+    }
+
+   
 }
 
 

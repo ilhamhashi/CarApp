@@ -28,7 +28,7 @@ public class CarAppSystem
 
     private void HovedMenu()
     {
-        string prompt = "--- Velkommen til CarApp System ---\nTryk på piletasterne for at navigere og tryk på enter for at vælge.\n";
+        string prompt = "--- Velkommen til CarApp System ---\nBrug piletasterne og Enter for at navigere.\n";
         string[] menuPunkter = { "Start", "Om CarApp System", "Afslut" };
         Menu hovedMenu = new(prompt, menuPunkter);
         int indexValgt = hovedMenu.Kør();
@@ -46,6 +46,30 @@ public class CarAppSystem
                 break;
         }
     }
+
+    //private void StartMenu()
+    //{
+    //    string prompt = "--- CarApp System ---\n";
+    //    string[] menuPunkter = { "Biler", "Ture", "Taxitjeneste", "Tilbage" };
+    //    Menu startMenu = new(prompt, menuPunkter);
+    //    int indexValgt = startMenu.Kør();
+
+    //    switch (indexValgt)
+    //    {
+    //        case 0:
+    //            BilMenu();
+    //            break;
+    //        case 1:
+    //            TurMenu();
+    //            break;
+    //        case 2:
+    //            TaxaMenu();
+    //            break;
+    //        case 3:
+    //            HovedMenu();
+    //            break;
+    //    }
+    //}
 
     private void StartMenu()
     {

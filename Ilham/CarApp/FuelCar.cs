@@ -1,10 +1,12 @@
 ﻿using System;
 
-public class FuelCar : Car
+public class FuelCar : Car, IEnergy
 {
     public double FuelLevel { get; set; }
 	public double TankCapacity { get; set; }
 	public double KmPerLiter { get; set; }
+    public double EnergyLevel { get; }
+    public double MaxEnergy { get; }
 
     public FuelCar(string brand, string model, string licensePlate, double tankCapacity, double kmPerLiter) : base(brand, model, licensePlate)
     {
@@ -13,15 +15,19 @@ public class FuelCar : Car
 		FuelLevel = 0;
     }
 
-    public override void RefuelOrCharge(double amount)
+    public void Refill(double amount)
 	{
         FuelLevel += amount;
         Console.WriteLine($"Nyt brændstofniveau: {FuelLevel} L.");
 	}
-
-    public override bool CanDrive()
+    public void UseEnergy(double distance)
     {
-        if (FuelLevel >0 && isEngineOn)
+        FuelLevel -= distance / KmPerLiter;
+    }
+
+    /* public bool CanDrive()
+    {
+        if (FuelLevel >0 && isEngineRunning)
             return true;
         else
         {
@@ -29,20 +35,10 @@ public class FuelCar : Car
         }
     }
 
-    public override void UpdateEnergyLevel(double distance)
-    {
-        FuelLevel -= CalculateConsumption(distance);
-    }
-
-    public override double CalculateConsumption(double distance)
-    {
-        return distance / KmPerLiter;
-    }
-
     public override void Drive(double distance)
     {
             base.Drive(distance);
-    }
+    } */
 
     static public Car AddACar()
     {
